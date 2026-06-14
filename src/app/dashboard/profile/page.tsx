@@ -72,7 +72,7 @@ export default async function ProfilePage() {
             </p>
           </div>
         </Card>
-        <Stat label="Market Readiness" value={`${cp.market_readiness}%`} accent="emerald" icon={<Icons.chart className="h-5 w-5" />} />
+        <Stat label="Market Readiness" value={`${cp.market_readiness}%`} icon={<Icons.chart className="h-5 w-5" />} />
         <Card className="p-5">
           <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
             Verification
@@ -181,7 +181,7 @@ export default async function ProfilePage() {
         <h2 className="mb-4 text-lg font-semibold text-slate-900">Skills</h2>
         <div className="mb-4 flex flex-wrap gap-2">
           {(skills ?? []).map((s) => (
-            <span key={s.id} className="inline-flex items-center gap-1.5 rounded-full bg-indigo-50 px-3 py-1 text-xs font-medium text-indigo-700">
+            <span key={s.id} className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700">
               {s.name}
               <DeleteBtn table="skills" id={s.id} compact />
             </span>
@@ -219,7 +219,7 @@ function DeleteBtn({
         type="submit"
         className={
           compact
-            ? "text-indigo-400 hover:text-rose-600"
+            ? "text-emerald-400 hover:text-rose-600"
             : "text-sm font-medium text-slate-400 hover:text-rose-600"
         }
         aria-label="Remove"

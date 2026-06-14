@@ -4,7 +4,7 @@ import { ButtonLink } from "@/components/ui";
 
 export function SiteHeader({ authed }: { authed?: boolean }) {
   return (
-    <header className="sticky top-0 z-30 border-b border-slate-200/70 bg-white/80 backdrop-blur">
+    <header className="sticky top-0 z-30 border-b border-slate-200 bg-white">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Logo />
         <nav className="hidden items-center gap-7 text-sm font-medium text-slate-600 md:flex">

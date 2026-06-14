@@ -29,25 +29,25 @@ export function MobileNav({
       {open ? (
         <div className="fixed inset-0 z-50 md:hidden">
           <div
-            className="absolute inset-0 bg-slate-900/50 backdrop-blur-sm"
+            className="absolute inset-0 bg-slate-900/30"
             onClick={() => setOpen(false)}
           />
-          <div className="animate-fade-in absolute left-0 top-0 flex h-full w-72 flex-col bg-slate-900 p-4">
+          <div className="animate-fade-up absolute left-0 top-0 flex h-full w-72 flex-col border-r border-slate-200 bg-white p-3">
             <div className="flex items-center justify-between px-2 py-2">
-              <Logo href="/dashboard" light />
+              <Logo href="/dashboard" />
               <button
                 type="button"
                 onClick={() => setOpen(false)}
                 aria-label="Close menu"
-                className="rounded-lg p-1.5 text-slate-400 hover:bg-white/10 hover:text-white"
+                className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-700"
               >
                 <Icons.x className="h-5 w-5" />
               </button>
             </div>
-            <div className="mt-6 flex-1" onClick={() => setOpen(false)}>
+            <div className="mt-5 flex-1" onClick={() => setOpen(false)}>
               <SidebarNav items={items} />
             </div>
-            <div className="border-t border-white/10 pt-3">{footer}</div>
+            <div className="border-t border-slate-200 pt-2">{footer}</div>
           </div>
         </div>
       ) : null}

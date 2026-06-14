@@ -59,7 +59,7 @@ export default async function ApplicationsPage() {
                   <div>
                     <Link
                       href={job?.id ? `/jobs/${job.id}` : "#"}
-                      className="text-lg font-semibold text-slate-900 hover:text-indigo-700"
+                      className="text-lg font-semibold text-slate-900 hover:text-emerald-700"
                     >
                       {job?.title ?? "Job"}
                     </Link>

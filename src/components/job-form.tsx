@@ -61,8 +61,8 @@ export function JobForm({ defaultCompany }: { defaultCompany: string }) {
         />
       </Field>
 
-      <div className="flex items-center justify-between rounded-xl bg-indigo-50 px-4 py-3">
-        <p className="text-sm text-indigo-700">
+      <div className="flex items-center justify-between rounded-xl bg-emerald-50 px-4 py-3">
+        <p className="text-sm text-emerald-700">
           ✨ Let AI draft the description, responsibilities & requirements.
         </p>
         <Button type="button" variant="secondary" size="sm" onClick={runAi}>

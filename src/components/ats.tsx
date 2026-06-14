@@ -20,7 +20,7 @@ export function StageSelect({
         name="status"
         defaultValue={current}
         onChange={() => formRef.current?.requestSubmit()}
-        className="w-full rounded-lg border border-slate-200 bg-white px-2 py-1.5 text-xs font-medium text-slate-700 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+        className="w-full rounded-lg border border-slate-200 bg-white px-2 py-1.5 text-xs font-medium text-slate-700 focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-200"
         aria-label="Move stage"
       >
         {APPLICATION_STAGES.map((s) => (

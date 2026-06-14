@@ -2,7 +2,7 @@ import Link from "next/link";
 import { getProfile } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
 import { SiteHeader, SiteFooter } from "@/components/site";
-import { Card, Badge, Input, Select, Button, EmptyState } from "@/components/ui";
+import { Card, Badge, Input, Select, Button, EmptyState, Avatar } from "@/components/ui";
 import { Icons } from "@/components/icons";
 import {
   JOB_TYPES,
@@ -80,42 +80,49 @@ export default async function JobsPage({
         </form>
 
         {/* Results */}
-        <div className="mt-6 space-y-3">
+        <div className="mt-6 space-y-2.5">
           {jobs && jobs.length ? (
             jobs.map((j) => {
               const company = j.companies as { name?: string } | null;
+              const salary =
+                j.salary_min || j.salary_max
+                  ? `${j.currency} ${(j.salary_min ?? 0).toLocaleString()}–${(j.salary_max ?? 0).toLocaleString()}`
+                  : null;
               return (
-                <Link key={j.id} href={`/jobs/${j.id}`}>
-                  <Card hover className="p-5">
-                    <div className="flex flex-wrap items-start justify-between gap-2">
-                      <div>
-                        <h2 className="text-lg font-semibold text-slate-900">
+                <Link key={j.id} href={`/jobs/${j.id}`} className="block">
+                  <Card hover className="flex items-center gap-4 p-4">
+                    <Avatar name={company?.name ?? "Co"} size={42} />
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-2">
+                        <h2 className="truncate text-sm font-semibold text-slate-900">
                           {j.title}
                         </h2>
-                        <p className="text-sm text-slate-500">
-                          {company?.name ?? "Company"} · {j.location ?? "—"}
-                        </p>
-                      </div>
-                      <div className="flex flex-wrap gap-1.5">
-                        <Badge className="bg-indigo-50 text-indigo-700">
+                        <Badge className="bg-emerald-50 text-emerald-700">
                           {WORK_MODE_LABELS[j.work_mode]}
                         </Badge>
-                        <Badge>{JOB_TYPE_LABELS[j.employment_type]}</Badge>
                       </div>
-                    </div>
-                    {(j.salary_min || j.salary_max) && (
-                      <p className="mt-2 text-sm font-medium text-slate-700">
-                        {j.currency} {j.salary_min?.toLocaleString() ?? "—"} –{" "}
-                        {j.salary_max?.toLocaleString() ?? "—"}
+                      <p className="mt-0.5 truncate text-sm text-slate-500">
+                        {company?.name ?? "Company"} · {j.location ?? "—"} ·{" "}
+                        {JOB_TYPE_LABELS[j.employment_type]}
                       </p>
-                    )}
-                    {j.skills_required?.length ? (
-                      <div className="mt-3 flex flex-wrap gap-1.5">
-                        {j.skills_required.slice(0, 6).map((s: string) => (
-                          <Badge key={s}>{s}</Badge>
-                        ))}
-                      </div>
-                    ) : null}
+                      {j.skills_required?.length ? (
+                        <div className="mt-2 flex flex-wrap gap-1.5">
+                          {j.skills_required.slice(0, 4).map((s: string) => (
+                            <Badge key={s}>{s}</Badge>
+                          ))}
+                        </div>
+                      ) : null}
+                    </div>
+                    <div className="hidden shrink-0 text-right sm:block">
+                      {salary ? (
+                        <p className="text-sm font-medium tabular-nums text-slate-700">
+                          {salary}
+                        </p>
+                      ) : null}
+                      <span className="mt-1 inline-flex items-center gap-1 text-xs font-medium text-emerald-700">
+                        View <Icons.arrowRight className="h-3.5 w-3.5" />
+                      </span>
+                    </div>
                   </Card>
                 </Link>
               );

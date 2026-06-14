@@ -59,7 +59,7 @@ export default async function JobDetail({
       <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-10 sm:px-6">
         <Link
           href="/jobs"
-          className="text-sm font-medium text-indigo-600 hover:text-indigo-700"
+          className="text-sm font-medium text-emerald-700 hover:text-emerald-700"
         >
           ← Back to jobs
         </Link>
@@ -75,7 +75,7 @@ export default async function JobDetail({
                 {company?.name ?? "Company"} · {job.location ?? "—"}
               </p>
               <div className="mt-3 flex flex-wrap gap-1.5">
-                <Badge className="bg-indigo-50 text-indigo-700">
+                <Badge className="bg-emerald-50 text-emerald-700">
                   {WORK_MODE_LABELS[job.work_mode]}
                 </Badge>
                 <Badge>{JOB_TYPE_LABELS[job.employment_type]}</Badge>

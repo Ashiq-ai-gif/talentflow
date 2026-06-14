@@ -45,9 +45,9 @@ export default async function DashboardHome() {
         />
         <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
           <Stat label="Open jobs" value={openJobs} icon={<Icons.briefcase className="h-5 w-5" />} />
-          <Stat label="Total jobs" value={jobs?.length ?? 0} accent="violet" icon={<Icons.folder className="h-5 w-5" />} />
-          <Stat label="Applicants" value={appsCount} accent="sky" icon={<Icons.users className="h-5 w-5" />} />
-          <Stat label="Hired" value={hiredCount} accent="emerald" icon={<Icons.check className="h-5 w-5" />} />
+          <Stat label="Total jobs" value={jobs?.length ?? 0} icon={<Icons.folder className="h-5 w-5" />} />
+          <Stat label="Applicants" value={appsCount} icon={<Icons.users className="h-5 w-5" />} />
+          <Stat label="Hired" value={hiredCount} icon={<Icons.check className="h-5 w-5" />} />
         </div>
         <h2 className="mt-8 mb-3 text-lg font-semibold text-slate-900">
           Recent jobs
@@ -95,8 +95,8 @@ export default async function DashboardHome() {
         />
         <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">
           <Stat label="Placements" value={placements?.length ?? 0} icon={<Icons.handshake className="h-5 w-5" />} />
-          <Stat label="Successful" value={placed} accent="emerald" icon={<Icons.check className="h-5 w-5" />} />
-          <Stat label="Commission" value={`₹${commission.toLocaleString()}`} accent="amber" icon={<Icons.bolt className="h-5 w-5" />} />
+          <Stat label="Successful" value={placed} icon={<Icons.check className="h-5 w-5" />} />
+          <Stat label="Commission" value={`₹${commission.toLocaleString()}`} icon={<Icons.bolt className="h-5 w-5" />} />
         </div>
         <div className="mt-8">
           <ButtonLink href="/jobs" variant="secondary">
@@ -125,8 +125,8 @@ export default async function DashboardHome() {
         />
         <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">
           <Stat label="Users" value={users ?? 0} icon={<Icons.users className="h-5 w-5" />} />
-          <Stat label="Jobs" value={jobs ?? 0} accent="violet" icon={<Icons.briefcase className="h-5 w-5" />} />
-          <Stat label="Open reports" value={reports ?? 0} accent="rose" icon={<Icons.flag className="h-5 w-5" />} />
+          <Stat label="Jobs" value={jobs ?? 0} icon={<Icons.briefcase className="h-5 w-5" />} />
+          <Stat label="Open reports" value={reports ?? 0} icon={<Icons.flag className="h-5 w-5" />} />
         </div>
         <div className="mt-8 flex gap-3">
           <ButtonLink href="/dashboard/admin">Moderation queue</ButtonLink>
@@ -173,10 +173,9 @@ export default async function DashboardHome() {
         <Stat
           label="Market Readiness"
           value={`${candidate?.market_readiness ?? 0}%`}
-          accent="emerald"
           icon={<Icons.chart className="h-5 w-5" />}
         />
-        <Stat label="Applications" value={apps?.length ?? 0} accent="violet" icon={<Icons.folder className="h-5 w-5" />} />
+        <Stat label="Applications" value={apps?.length ?? 0} icon={<Icons.folder className="h-5 w-5" />} />
       </div>
 
       <h2 className="mt-8 mb-3 text-lg font-semibold text-slate-900">

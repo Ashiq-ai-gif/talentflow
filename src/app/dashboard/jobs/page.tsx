@@ -49,7 +49,7 @@ export default async function EmployerJobsPage() {
                   </p>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Badge className="bg-indigo-50 text-indigo-700">
+                  <Badge className="bg-emerald-50 text-emerald-700">
                     {counts[j.id] ?? 0} applicants
                   </Badge>
                   <Badge

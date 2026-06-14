@@ -9,7 +9,7 @@ import { cn } from "@/components/ui";
 export function SidebarNav({ items }: { items: NavItem[] }) {
   const pathname = usePathname();
   return (
-    <nav className="space-y-1">
+    <nav className="space-y-0.5">
       {items.map((it) => {
         const active =
           it.href === "/dashboard"
@@ -21,22 +21,22 @@ export function SidebarNav({ items }: { items: NavItem[] }) {
             key={it.href}
             href={it.href}
             className={cn(
-              "group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition",
+              "group relative flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
               active
-                ? "bg-white/10 text-white"
-                : "text-slate-400 hover:bg-white/5 hover:text-white",
+                ? "bg-emerald-50 text-emerald-700"
+                : "text-slate-600 hover:bg-slate-100 hover:text-slate-900",
             )}
           >
+            {active ? (
+              <span className="absolute left-0 top-1/2 h-5 w-0.5 -translate-y-1/2 rounded-full bg-emerald-600" />
+            ) : null}
             <Icon
               className={cn(
-                "h-5 w-5 shrink-0 transition",
-                active ? "text-indigo-300" : "text-slate-500 group-hover:text-slate-300",
+                "h-[18px] w-[18px] shrink-0",
+                active ? "text-emerald-600" : "text-slate-400 group-hover:text-slate-500",
               )}
             />
             {it.label}
-            {active ? (
-              <span className="ml-auto h-1.5 w-1.5 rounded-full bg-indigo-400" />
-            ) : null}
           </Link>
         );
       })}

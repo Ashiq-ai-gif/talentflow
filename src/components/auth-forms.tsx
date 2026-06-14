@@ -37,7 +37,7 @@ export function RegisterForm({ defaultRole }: { defaultRole: string }) {
           {(["job_seeker", "employer", "recruiter"] as const).map((r) => (
             <label
               key={r}
-              className="flex cursor-pointer items-center justify-center rounded-xl border border-slate-200 px-2 py-2 text-xs font-medium text-slate-600 has-[:checked]:border-indigo-500 has-[:checked]:bg-indigo-50 has-[:checked]:text-indigo-700"
+              className="flex cursor-pointer items-center justify-center rounded-lg border border-slate-300 px-2 py-2 text-xs font-medium text-slate-600 has-[:checked]:border-emerald-500 has-[:checked]:bg-emerald-50 has-[:checked]:text-emerald-700"
             >
               <input
                 type="radio"
@@ -56,7 +56,7 @@ export function RegisterForm({ defaultRole }: { defaultRole: string }) {
       </Button>
       <p className="text-center text-sm text-slate-500">
         Already have an account?{" "}
-        <Link href="/login" className="font-medium text-indigo-600 hover:text-indigo-700">
+        <Link href="/login" className="font-medium text-emerald-700 hover:text-emerald-700">
           Sign in
         </Link>
       </p>
@@ -84,7 +84,7 @@ export function LoginForm({ next }: { next: string }) {
       </Button>
       <p className="text-center text-sm text-slate-500">
         New to TalentFlow?{" "}
-        <Link href="/register" className="font-medium text-indigo-600 hover:text-indigo-700">
+        <Link href="/register" className="font-medium text-emerald-700 hover:text-emerald-700">
           Create an account
         </Link>
       </p>

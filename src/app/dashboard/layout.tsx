@@ -7,7 +7,6 @@ import { Avatar, ButtonLink } from "@/components/ui";
 import { SidebarNav } from "@/components/sidebar";
 import { SignOutButton } from "@/components/signout-button";
 import { MobileNav } from "@/components/mobile-nav";
-import { Icons } from "@/components/icons";
 
 export default async function DashboardLayout({
   children,
@@ -23,12 +22,12 @@ export default async function DashboardLayout({
   const userCard = (
     <>
       <div className="flex items-center gap-3 px-2 py-2">
-        <Avatar name={name} />
+        <Avatar name={name} size={34} />
         <div className="min-w-0">
-          <p className="truncate text-sm font-medium text-white">
+          <p className="truncate text-sm font-medium text-slate-900">
             {profile.full_name ?? "Member"}
           </p>
-          <p className="truncate text-xs text-slate-400">
+          <p className="truncate text-xs text-slate-500">
             {ROLE_LABELS[profile.role]}
           </p>
         </div>
@@ -39,36 +38,33 @@ export default async function DashboardLayout({
 
   return (
     <div className="flex min-h-screen bg-slate-50">
-      {/* Desktop sidebar (dark) */}
-      <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col bg-slate-900 p-4 md:flex">
+      {/* Desktop sidebar (light) */}
+      <aside className="sticky top-0 hidden h-screen w-60 shrink-0 flex-col border-r border-slate-200 bg-white p-3 md:flex">
         <div className="px-2 py-2">
-          <Logo href="/dashboard" light />
+          <Logo href="/dashboard" />
         </div>
-        <div className="mt-6 flex-1">
+        <div className="mt-5 flex-1">
           <SidebarNav items={items} />
         </div>
-        <div className="border-t border-white/10 pt-3">{userCard}</div>
+        <div className="border-t border-slate-200 pt-2">{userCard}</div>
       </aside>
 
       {/* Main */}
       <div className="flex min-w-0 flex-1 flex-col">
         {/* Top bar */}
-        <header className="sticky top-0 z-30 flex items-center justify-between border-b border-slate-200 bg-white/80 px-4 py-3 backdrop-blur sm:px-6">
+        <header className="sticky top-0 z-30 flex h-14 items-center justify-between border-b border-slate-200 bg-white px-4 sm:px-6">
           <div className="flex items-center gap-2 md:hidden">
             <MobileNav items={items} footer={userCard} />
             <Logo href="/dashboard" />
           </div>
-          <div className="hidden items-center gap-2 text-sm text-slate-400 md:flex">
-            <Icons.bolt className="h-4 w-4 text-indigo-500" />
-            <span className="font-medium text-slate-600">
-              {ROLE_LABELS[profile.role]} workspace
-            </span>
-          </div>
+          <p className="hidden text-sm font-medium text-slate-500 md:block">
+            {ROLE_LABELS[profile.role]} workspace
+          </p>
           <div className="flex items-center gap-3">
             <ButtonLink href="/" variant="ghost" size="sm">
               View site
             </ButtonLink>
-            <Avatar name={name} size={34} />
+            <Avatar name={name} size={32} />
           </div>
         </header>
 

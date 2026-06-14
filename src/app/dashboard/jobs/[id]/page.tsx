@@ -47,14 +47,14 @@ export default async function JobAtsPage({
 
   return (
     <>
-      <Link href="/dashboard/jobs" className="text-sm font-medium text-indigo-600 hover:text-indigo-700">
+      <Link href="/dashboard/jobs" className="text-sm font-medium text-emerald-700 hover:text-emerald-700">
         ← All jobs
       </Link>
       <PageHeader
         title={job.title}
         subtitle="Applicant tracking — move candidates through your pipeline."
         action={
-          <Link href={`/jobs/${job.id}`} className="text-sm font-medium text-indigo-600 hover:text-indigo-700">
+          <Link href={`/jobs/${job.id}`} className="text-sm font-medium text-emerald-700 hover:text-emerald-700">
             View public posting →
           </Link>
         }
@@ -62,9 +62,9 @@ export default async function JobAtsPage({
 
       <div className="mb-6 grid grid-cols-2 gap-4 lg:grid-cols-4">
         <Stat label="Applicants" value={total} icon={<Icons.users className="h-5 w-5" />} />
-        <Stat label="Shortlisted" value={byStage.shortlisted?.length ?? 0} accent="violet" icon={<Icons.star className="h-5 w-5" />} />
-        <Stat label="Interviewing" value={byStage.interview_scheduled?.length ?? 0} accent="amber" icon={<Icons.calendar className="h-5 w-5" />} />
-        <Stat label="Hired" value={hired} accent="emerald" icon={<Icons.check className="h-5 w-5" />} />
+        <Stat label="Shortlisted" value={byStage.shortlisted?.length ?? 0} icon={<Icons.star className="h-5 w-5" />} />
+        <Stat label="Interviewing" value={byStage.interview_scheduled?.length ?? 0} icon={<Icons.calendar className="h-5 w-5" />} />
+        <Stat label="Hired" value={hired} icon={<Icons.check className="h-5 w-5" />} />
       </div>
 
       {total === 0 ? (

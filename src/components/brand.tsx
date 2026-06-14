@@ -2,76 +2,73 @@ import Link from "next/link";
 import { Badge } from "@/components/ui";
 import { STAGE_LABELS, STAGE_COLORS, MATCH_LABELS } from "@/lib/constants";
 
-/** TalentFlow logo mark — a flow glyph in a gradient tile. */
-export function LogoMark({ size = 32 }: { size?: number }) {
+/** TalentFlow mark — solid emerald tile with a simple flow glyph. */
+export function LogoMark({ size = 28 }: { size?: number }) {
   return (
     <span
-      className="grid place-items-center rounded-xl shadow-brand"
-      style={{
-        width: size,
-        height: size,
-        background: "linear-gradient(135deg,#6366f1,#8b5cf6 55%,#10b981)",
-      }}
+      className="grid place-items-center rounded-md bg-emerald-600"
+      style={{ width: size, height: size }}
     >
-      <svg width={size * 0.62} height={size * 0.62} viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <path
-          d="M4 7h16M4 12h10M4 17h6"
-          stroke="white"
-          strokeWidth={2.4}
-          strokeLinecap="round"
-        />
-        <circle cx="18.5" cy="15.5" r="2.4" stroke="white" strokeWidth={2.2} />
+      <svg
+        width={size * 0.62}
+        height={size * 0.62}
+        viewBox="0 0 24 24"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path d="M5 7h14M5 12h9M5 17h5" stroke="white" strokeWidth={2.4} strokeLinecap="round" />
       </svg>
     </span>
   );
 }
 
-/** TalentFlow wordmark + mark. Set `light` on dark backgrounds. */
+/** Wordmark + mark. `light` flips the wordmark to white for dark surfaces. */
 export function Logo({
   href = "/",
   light = false,
-  size = 32,
+  size = 28,
 }: {
   href?: string;
   light?: boolean;
   size?: number;
 }) {
   return (
-    <Link href={href} className="inline-flex items-center gap-2.5">
+    <Link href={href} className="inline-flex items-center gap-2">
       <LogoMark size={size} />
       <span
-        className={
-          light
-            ? "text-lg font-semibold tracking-tight text-white"
-            : "text-lg font-semibold tracking-tight text-slate-900"
-        }
+        className={cnText(light)}
       >
-        Talent
-        <span className={light ? "text-emerald-300" : "text-gradient"}>Flow</span>
+        TalentFlow
       </span>
     </Link>
   );
 }
 
-/** Application-stage chip mapped to the brand status palette. */
+function cnText(light: boolean) {
+  return light
+    ? "text-[17px] font-semibold tracking-tight text-white"
+    : "text-[17px] font-semibold tracking-tight text-slate-900";
+}
+
+/** Application-stage chip. */
 export function PipelineBadge({ status }: { status: string }) {
   return (
-    <Badge className={STAGE_COLORS[status] ?? "bg-slate-100 text-slate-700"}>
+    <Badge className={STAGE_COLORS[status] ?? "bg-slate-100 text-slate-600"}>
       {STAGE_LABELS[status] ?? status}
     </Badge>
   );
 }
 
 const MATCH_CLS: Record<string, string> = {
-  best: "bg-emerald-100 text-emerald-700",
-  good: "bg-sky-100 text-sky-700",
-  average: "bg-amber-100 text-amber-700",
-  poor: "bg-rose-100 text-rose-700",
+  best: "bg-emerald-50 text-emerald-700",
+  good: "bg-sky-50 text-sky-700",
+  average: "bg-amber-50 text-amber-700",
+  poor: "bg-rose-50 text-rose-700",
 };
 
 export function MatchBadge({ band, score }: { band: string; score?: number }) {
   return (
-    <Badge className={MATCH_CLS[band] ?? "bg-slate-100 text-slate-700"}>
+    <Badge className={MATCH_CLS[band] ?? "bg-slate-100 text-slate-600"}>
       {MATCH_LABELS[band] ?? band}
       {typeof score === "number" ? ` · ${score}` : ""}
     </Badge>

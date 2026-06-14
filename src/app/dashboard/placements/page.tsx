@@ -40,8 +40,8 @@ export default async function PlacementsPage() {
       />
       <div className="mb-6 grid grid-cols-2 gap-4 lg:grid-cols-3">
         <Stat label="Total" value={placements?.length ?? 0} icon={<Icons.handshake className="h-5 w-5" />} />
-        <Stat label="Placed" value={placed} accent="emerald" icon={<Icons.check className="h-5 w-5" />} />
-        <Stat label="Commission" value={`₹${commission.toLocaleString()}`} accent="amber" icon={<Icons.bolt className="h-5 w-5" />} />
+        <Stat label="Placed" value={placed} icon={<Icons.check className="h-5 w-5" />} />
+        <Stat label="Commission" value={`₹${commission.toLocaleString()}`} icon={<Icons.bolt className="h-5 w-5" />} />
       </div>
       {placements && placements.length ? (
         <div className="space-y-2">
