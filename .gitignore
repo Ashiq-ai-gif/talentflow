@@ -39,3 +39,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+.env*.local
+.env.local
+.db_password.txt
+.supabase_create.log
+supabase/.temp
+
+# keep the example committed
+!.env.example

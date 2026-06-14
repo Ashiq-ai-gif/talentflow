@@ -1,26 +1,37 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f7f8fb;
+  --foreground: #0f172a;
+  --brand: #4f46e5;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-brand: var(--brand);
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Brand hero mesh — indigo + emerald, used on marketing & auth. */
+.gradient-hero {
+  background:
+    radial-gradient(1100px 480px at 8% -12%, rgba(99, 102, 241, 0.18), transparent),
+    radial-gradient(820px 380px at 92% 0%, rgba(16, 185, 129, 0.14), transparent),
+    linear-gradient(180deg, #ffffff, #f7f8fb);
+}
+
+.text-gradient {
+  background: linear-gradient(90deg, #6366f1, #10b981);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }

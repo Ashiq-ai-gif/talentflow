@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TalentFlow — Smart Hiring & Recruitment Platform
 
-## Getting Started
+> Hiring, made smart. A complete hiring ecosystem — recruitment, applicant tracking,
+> verification, AI screening, interviews, onboarding, and analytics — for job seekers,
+> employers, and recruiters.
 
-First, run the development server:
+Built with **Next.js 16** (App Router, RSC, Server Actions), **TypeScript**, **Tailwind v4**,
+and **Supabase** (Postgres + Auth + Row Level Security). Deployed on **Vercel**.
+
+## Features
+
+- **Auth & RBAC** — email/password auth with five roles (job seeker, employer, recruiter, admin, super admin), enforced by Postgres RLS.
+- **Job seeker** — candidate profile, education/experience/skills, Career Score, verification badges, application tracking pipeline.
+- **Job discovery** — keyword/location search with work-mode and job-type filters; one-click apply.
+- **Employer** — company profile, AI-assisted job posting, and a full **ATS** board (Applied → Hired) with match bands.
+- **Recruiter** — placements & commission tracking.
+- **Admin / Super Admin** — content moderation, reports, feature flags, platform overview.
+
+> Heavier integrations (AI screening calls, video-resume transcription, WhatsApp/SMS) are
+> modelled in the schema and scaffolded behind clear stubs — see `docs/PRD.md`.
+
+## Docs
+
+- [`docs/PRD.md`](docs/PRD.md) — product requirements.
+- [`docs/BRAND_GUIDELINES.md`](docs/BRAND_GUIDELINES.md) — brand.
+- [`docs/COLOR_PALETTE.md`](docs/COLOR_PALETTE.md) — color tokens.
+- [`docs/DESIGN_GUIDELINES.md`](docs/DESIGN_GUIDELINES.md) — design system.
+
+## Getting started
 
 ```bash
+npm install
+cp .env.example .env.local   # fill in your Supabase URL + anon key
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Database
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+SQL migrations live in `supabase/migrations`. Apply them with the Supabase CLI:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+supabase link --project-ref <your-ref>
+supabase db push
+```
 
-## Learn More
+Seed demo data (uses the service role key — never commit it):
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+SUPABASE_URL=... SUPABASE_SERVICE_ROLE_KEY=... node scripts/seed.mjs
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Demo accounts
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Password for all: `Demo12345!`
 
-## Deploy on Vercel
+| Role | Email |
+|---|---|
+| Employer | employer@talentflow.demo |
+| Job Seeker | seeker@talentflow.demo |
+| Recruiter | recruiter@talentflow.demo |
+| Admin | admin@talentflow.demo |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Tech notes (Next.js 16)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Async request APIs: `await cookies()`, and `params`/`searchParams` are Promises.
+- Session refresh uses the new **`proxy.ts`** convention (formerly middleware).
+
+## License
+
+Proprietary — all rights reserved.
