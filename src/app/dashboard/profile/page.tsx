@@ -11,7 +11,9 @@ import {
   Field,
   Stat,
   Badge,
+  ProgressRing,
 } from "@/components/ui";
+import { Icons } from "@/components/icons";
 import { BADGE_META } from "@/lib/constants";
 import {
   updateCandidateProfile,
@@ -59,8 +61,18 @@ export default async function ProfilePage() {
       />
 
       <div className="mb-6 grid grid-cols-2 gap-4 lg:grid-cols-4">
-        <Stat label="Career Score" value={cp.career_score} />
-        <Stat label="Market Readiness" value={`${cp.market_readiness}%`} />
+        <Card className="flex items-center gap-4 p-5">
+          <ProgressRing value={cp.career_score} label="score" />
+          <div>
+            <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
+              Career Score
+            </p>
+            <p className="mt-1 text-sm text-slate-600">
+              Complete your profile to grow it.
+            </p>
+          </div>
+        </Card>
+        <Stat label="Market Readiness" value={`${cp.market_readiness}%`} accent="emerald" icon={<Icons.chart className="h-5 w-5" />} />
         <Card className="p-5">
           <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
             Verification

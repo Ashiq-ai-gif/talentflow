@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f7f8fb;
+  --background: #f8fafc;
   --foreground: #0f172a;
   --brand: #4f46e5;
 }
@@ -12,6 +12,34 @@
   --color-brand: var(--brand);
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  /* Custom motion */
+  --animate-fade-up: fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-fade-in: fade-in 0.5s ease both;
+  --animate-shimmer: shimmer 1.6s linear infinite;
+  --animate-float: float 7s ease-in-out infinite;
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes shimmer {
+  from { background-position: -200% 0; }
+  to { background-position: 200% 0; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
 }
 
 body {
@@ -19,19 +47,86 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-/* Brand hero mesh — indigo + emerald, used on marketing & auth. */
+/* ---- Brand surfaces ---------------------------------------------------- */
+
+/* Rich aurora mesh for hero + auth panels */
 .gradient-hero {
   background:
-    radial-gradient(1100px 480px at 8% -12%, rgba(99, 102, 241, 0.18), transparent),
-    radial-gradient(820px 380px at 92% 0%, rgba(16, 185, 129, 0.14), transparent),
-    linear-gradient(180deg, #ffffff, #f7f8fb);
+    radial-gradient(900px 460px at 12% -10%, rgba(99, 102, 241, 0.20), transparent 60%),
+    radial-gradient(760px 420px at 88% 4%, rgba(16, 185, 129, 0.16), transparent 60%),
+    radial-gradient(700px 500px at 60% 110%, rgba(168, 85, 247, 0.12), transparent 60%),
+    linear-gradient(180deg, #ffffff, #f5f7fb);
+}
+
+/* Deep brand gradient for dark panels (auth aside, CTA) */
+.gradient-brand {
+  background:
+    radial-gradient(600px 400px at 20% 10%, rgba(129, 140, 248, 0.45), transparent 60%),
+    radial-gradient(600px 400px at 85% 90%, rgba(16, 185, 129, 0.35), transparent 60%),
+    linear-gradient(135deg, #312e81, #4f46e5 55%, #1e1b4b);
+}
+
+/* Faint dotted grid overlay */
+.bg-grid {
+  background-image: radial-gradient(circle, rgba(15, 23, 42, 0.05) 1px, transparent 1px);
+  background-size: 22px 22px;
 }
 
 .text-gradient {
-  background: linear-gradient(90deg, #6366f1, #10b981);
+  background: linear-gradient(90deg, #6366f1, #8b5cf6 45%, #10b981);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+/* Glass card */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Premium shadow used on primary cards / buttons */
+.shadow-brand {
+  box-shadow: 0 10px 30px -12px rgba(79, 70, 229, 0.45);
+}
+.shadow-soft {
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.04),
+    0 8px 24px -16px rgba(15, 23, 42, 0.12);
+}
+
+/* Skeleton shimmer */
+.skeleton {
+  background: linear-gradient(90deg, #eef2f7 25%, #e2e8f0 37%, #eef2f7 63%);
+  background-size: 200% 100%;
+  animation: var(--animate-shimmer);
+}
+
+/* Reusable entrance animations + stagger */
+.animate-fade-up { animation: var(--animate-fade-up); }
+.animate-fade-in { animation: var(--animate-fade-in); }
+.animate-float { animation: var(--animate-float); }
+.stagger > * { opacity: 0; animation: var(--animate-fade-up); }
+.stagger > *:nth-child(1) { animation-delay: 0.02s; }
+.stagger > *:nth-child(2) { animation-delay: 0.08s; }
+.stagger > *:nth-child(3) { animation-delay: 0.14s; }
+.stagger > *:nth-child(4) { animation-delay: 0.20s; }
+.stagger > *:nth-child(5) { animation-delay: 0.26s; }
+.stagger > *:nth-child(6) { animation-delay: 0.32s; }
+.stagger > *:nth-child(7) { animation-delay: 0.38s; }
+.stagger > *:nth-child(8) { animation-delay: 0.44s; }
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  .animate-fade-up,
+  .animate-fade-in,
+  .animate-float,
+  .stagger > * {
+    animation: none !important;
+    transition: none !important;
+  }
 }

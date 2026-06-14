@@ -3,6 +3,7 @@ import { getProfile } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
 import { Card, Stat, PageHeader, ButtonLink, EmptyState } from "@/components/ui";
 import { PipelineBadge } from "@/components/brand";
+import { Icons } from "@/components/icons";
 import { STAGE_LABELS } from "@/lib/constants";
 
 export const metadata = { title: "Dashboard" };
@@ -43,10 +44,10 @@ export default async function DashboardHome() {
           action={<ButtonLink href="/dashboard/jobs/new">Post a job</ButtonLink>}
         />
         <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-          <Stat label="Open jobs" value={openJobs} />
-          <Stat label="Total jobs" value={jobs?.length ?? 0} />
-          <Stat label="Applicants" value={appsCount} />
-          <Stat label="Hired" value={hiredCount} />
+          <Stat label="Open jobs" value={openJobs} icon={<Icons.briefcase className="h-5 w-5" />} />
+          <Stat label="Total jobs" value={jobs?.length ?? 0} accent="violet" icon={<Icons.folder className="h-5 w-5" />} />
+          <Stat label="Applicants" value={appsCount} accent="sky" icon={<Icons.users className="h-5 w-5" />} />
+          <Stat label="Hired" value={hiredCount} accent="emerald" icon={<Icons.check className="h-5 w-5" />} />
         </div>
         <h2 className="mt-8 mb-3 text-lg font-semibold text-slate-900">
           Recent jobs
@@ -66,7 +67,7 @@ export default async function DashboardHome() {
           </div>
         ) : (
           <EmptyState
-            icon="💼"
+            icon={<Icons.briefcase className="h-7 w-7" />}
             title="No jobs yet"
             hint="Post your first role to start receiving applicants."
             action={<ButtonLink href="/dashboard/jobs/new">Post a job</ButtonLink>}
@@ -93,9 +94,9 @@ export default async function DashboardHome() {
           subtitle="Track candidates you source and your commission."
         />
         <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">
-          <Stat label="Placements" value={placements?.length ?? 0} />
-          <Stat label="Successful" value={placed} />
-          <Stat label="Commission" value={`₹${commission.toLocaleString()}`} />
+          <Stat label="Placements" value={placements?.length ?? 0} icon={<Icons.handshake className="h-5 w-5" />} />
+          <Stat label="Successful" value={placed} accent="emerald" icon={<Icons.check className="h-5 w-5" />} />
+          <Stat label="Commission" value={`₹${commission.toLocaleString()}`} accent="amber" icon={<Icons.bolt className="h-5 w-5" />} />
         </div>
         <div className="mt-8">
           <ButtonLink href="/jobs" variant="secondary">
@@ -123,9 +124,9 @@ export default async function DashboardHome() {
           subtitle="Moderate content and keep the marketplace healthy."
         />
         <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">
-          <Stat label="Users" value={users ?? 0} />
-          <Stat label="Jobs" value={jobs ?? 0} />
-          <Stat label="Open reports" value={reports ?? 0} />
+          <Stat label="Users" value={users ?? 0} icon={<Icons.users className="h-5 w-5" />} />
+          <Stat label="Jobs" value={jobs ?? 0} accent="violet" icon={<Icons.briefcase className="h-5 w-5" />} />
+          <Stat label="Open reports" value={reports ?? 0} accent="rose" icon={<Icons.flag className="h-5 w-5" />} />
         </div>
         <div className="mt-8 flex gap-3">
           <ButtonLink href="/dashboard/admin">Moderation queue</ButtonLink>
@@ -168,12 +169,14 @@ export default async function DashboardHome() {
         action={<ButtonLink href="/jobs">Find jobs</ButtonLink>}
       />
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">
-        <Stat label="Career Score" value={candidate?.career_score ?? 0} />
+        <Stat label="Career Score" value={candidate?.career_score ?? 0} icon={<Icons.bolt className="h-5 w-5" />} />
         <Stat
           label="Market Readiness"
           value={`${candidate?.market_readiness ?? 0}%`}
+          accent="emerald"
+          icon={<Icons.chart className="h-5 w-5" />}
         />
-        <Stat label="Applications" value={apps?.length ?? 0} />
+        <Stat label="Applications" value={apps?.length ?? 0} accent="violet" icon={<Icons.folder className="h-5 w-5" />} />
       </div>
 
       <h2 className="mt-8 mb-3 text-lg font-semibold text-slate-900">
@@ -200,7 +203,7 @@ export default async function DashboardHome() {
         </div>
       ) : (
         <EmptyState
-          icon="🗂️"
+          icon={<Icons.folder className="h-7 w-7" />}
           title="No applications yet"
           hint="Browse open roles and apply in one click."
           action={<ButtonLink href="/jobs">Browse jobs</ButtonLink>}

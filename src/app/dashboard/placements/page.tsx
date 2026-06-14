@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { getProfile } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
 import { PageHeader, Card, Badge, Stat, EmptyState, ButtonLink } from "@/components/ui";
+import { Icons } from "@/components/icons";
 
 export const metadata = { title: "Placements" };
 
@@ -38,9 +39,9 @@ export default async function PlacementsPage() {
         action={<ButtonLink href="/jobs" variant="secondary">Browse roles</ButtonLink>}
       />
       <div className="mb-6 grid grid-cols-2 gap-4 lg:grid-cols-3">
-        <Stat label="Total" value={placements?.length ?? 0} />
-        <Stat label="Placed" value={placed} />
-        <Stat label="Commission" value={`₹${commission.toLocaleString()}`} />
+        <Stat label="Total" value={placements?.length ?? 0} icon={<Icons.handshake className="h-5 w-5" />} />
+        <Stat label="Placed" value={placed} accent="emerald" icon={<Icons.check className="h-5 w-5" />} />
+        <Stat label="Commission" value={`₹${commission.toLocaleString()}`} accent="amber" icon={<Icons.bolt className="h-5 w-5" />} />
       </div>
       {placements && placements.length ? (
         <div className="space-y-2">
@@ -63,7 +64,7 @@ export default async function PlacementsPage() {
         </div>
       ) : (
         <EmptyState
-          icon="🤝"
+          icon={<Icons.handshake className="h-7 w-7" />}
           title="No placements yet"
           hint="Source candidates for open roles to start tracking placements and commission."
           action={<ButtonLink href="/jobs">Find roles to fill</ButtonLink>}

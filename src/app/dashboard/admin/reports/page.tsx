@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { getProfile } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
 import { PageHeader, Card, Badge, Button, EmptyState } from "@/components/ui";
+import { Icons } from "@/components/icons";
 import { resolveReport } from "@/lib/actions/admin";
 
 export const metadata = { title: "Reports" };
@@ -59,7 +60,7 @@ export default async function ReportsPage() {
           ))}
         </div>
       ) : (
-        <EmptyState icon="🚩" title="No reports" hint="The marketplace is clean." />
+        <EmptyState icon={<Icons.flag className="h-7 w-7" />} title="No reports" hint="The marketplace is clean." />
       )}
     </>
   );

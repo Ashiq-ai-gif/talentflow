@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { getProfile } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
 import { PageHeader, Card, Badge, Button, EmptyState } from "@/components/ui";
+import { Icons } from "@/components/icons";
 import { setJobStatus } from "@/lib/actions/admin";
 
 export const metadata = { title: "Moderation" };
@@ -61,7 +62,7 @@ export default async function AdminPage() {
           })}
         </div>
       ) : (
-        <EmptyState icon="🛡️" title="Nothing to moderate" hint="New jobs will appear here." />
+        <EmptyState icon={<Icons.shield className="h-7 w-7" />} title="Nothing to moderate" hint="New jobs will appear here." />
       )}
     </>
   );

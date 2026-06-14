@@ -3,6 +3,7 @@ import { getProfile } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
 import { SiteHeader, SiteFooter } from "@/components/site";
 import { Card, Badge, Input, Select, Button, EmptyState } from "@/components/ui";
+import { Icons } from "@/components/icons";
 import {
   JOB_TYPES,
   JOB_TYPE_LABELS,
@@ -121,7 +122,7 @@ export default async function JobsPage({
             })
           ) : (
             <EmptyState
-              icon="🔎"
+              icon={<Icons.search className="h-7 w-7" />}
               title="No jobs match your search"
               hint="Try removing a filter or searching a different keyword."
             />

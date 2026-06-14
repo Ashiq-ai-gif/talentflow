@@ -3,6 +3,7 @@ import { getProfile } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
 import { PageHeader, Card, Button, EmptyState, ButtonLink } from "@/components/ui";
 import { PipelineBadge } from "@/components/brand";
+import { Icons } from "@/components/icons";
 import { withdrawApplication } from "@/lib/actions/jobs";
 import { APPLICATION_STAGES } from "@/lib/constants";
 
@@ -89,7 +90,7 @@ export default async function ApplicationsPage() {
         </div>
       ) : (
         <EmptyState
-          icon="🗂️"
+          icon={<Icons.folder className="h-7 w-7" />}
           title="No applications yet"
           hint="When you apply to jobs, they'll show up here with live status."
           action={<ButtonLink href="/jobs">Browse jobs</ButtonLink>}

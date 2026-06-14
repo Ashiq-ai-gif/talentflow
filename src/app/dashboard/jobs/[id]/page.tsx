@@ -5,6 +5,7 @@ import { createClient } from "@/lib/supabase/server";
 import { PageHeader, Card, Badge, Stat, EmptyState } from "@/components/ui";
 import { Avatar } from "@/components/ui";
 import { MatchBadge } from "@/components/brand";
+import { Icons } from "@/components/icons";
 import { StageSelect } from "@/components/ats";
 import { APPLICATION_STAGES, STAGE_LABELS } from "@/lib/constants";
 
@@ -60,15 +61,15 @@ export default async function JobAtsPage({
       />
 
       <div className="mb-6 grid grid-cols-2 gap-4 lg:grid-cols-4">
-        <Stat label="Applicants" value={total} />
-        <Stat label="Shortlisted" value={byStage.shortlisted?.length ?? 0} />
-        <Stat label="Interviewing" value={byStage.interview_scheduled?.length ?? 0} />
-        <Stat label="Hired" value={hired} />
+        <Stat label="Applicants" value={total} icon={<Icons.users className="h-5 w-5" />} />
+        <Stat label="Shortlisted" value={byStage.shortlisted?.length ?? 0} accent="violet" icon={<Icons.star className="h-5 w-5" />} />
+        <Stat label="Interviewing" value={byStage.interview_scheduled?.length ?? 0} accent="amber" icon={<Icons.calendar className="h-5 w-5" />} />
+        <Stat label="Hired" value={hired} accent="emerald" icon={<Icons.check className="h-5 w-5" />} />
       </div>
 
       {total === 0 ? (
         <EmptyState
-          icon="📭"
+          icon={<Icons.users className="h-7 w-7" />}
           title="No applicants yet"
           hint="Share your job posting to start receiving applications."
         />

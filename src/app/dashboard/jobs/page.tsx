@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { getProfile } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
 import { PageHeader, Card, Badge, EmptyState, ButtonLink } from "@/components/ui";
+import { Icons } from "@/components/icons";
 import { JOB_TYPE_LABELS, WORK_MODE_LABELS } from "@/lib/constants";
 
 export const metadata = { title: "Jobs" };
@@ -67,7 +68,7 @@ export default async function EmployerJobsPage() {
         </div>
       ) : (
         <EmptyState
-          icon="💼"
+          icon={<Icons.briefcase className="h-7 w-7" />}
           title="No jobs posted yet"
           hint="Create your first role to start receiving applicants."
           action={<ButtonLink href="/dashboard/jobs/new">Post a job</ButtonLink>}
