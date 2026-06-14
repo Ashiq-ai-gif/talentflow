@@ -1,9 +1,29 @@
 import Link from "next/link";
+import { unstable_cache } from "next/cache";
+import { createClient as createAnonClient } from "@supabase/supabase-js";
 import { getProfile } from "@/lib/auth";
-import { createClient } from "@/lib/supabase/server";
 import { SiteHeader, SiteFooter } from "@/components/site";
 import { Card, ButtonLink, Badge } from "@/components/ui";
 import { Icons, type IconName } from "@/components/icons";
+
+// Public landing stats. Cached for 5 minutes with a cookieless client so the
+// counts don't hit the database on every page load. (unstable_cache can't read
+// cookies, hence the anon client rather than the request-scoped one.)
+const getPublicStats = unstable_cache(
+  async () => {
+    const sb = createAnonClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    );
+    const [{ count: jobCount }, { count: companyCount }] = await Promise.all([
+      sb.from("jobs").select("id", { count: "exact", head: true }).eq("status", "open"),
+      sb.from("companies").select("id", { count: "exact", head: true }),
+    ]);
+    return { jobCount: jobCount ?? 0, companyCount: companyCount ?? 0 };
+  },
+  ["public-stats"],
+  { revalidate: 300 },
+);
 
 const MODULES: { icon: IconName; title: string; desc: string }[] = [
   { icon: "search", title: "Job Discovery", desc: "Keyword, location & skill search with smart filters." },
@@ -35,11 +55,9 @@ const PLANS = [
 ];
 
 export default async function Home() {
-  const profile = await getProfile();
-  const supabase = await createClient();
-  const [{ count: jobCount }, { count: companyCount }] = await Promise.all([
-    supabase.from("jobs").select("id", { count: "exact", head: true }).eq("status", "open"),
-    supabase.from("companies").select("id", { count: "exact", head: true }),
+  const [profile, { jobCount, companyCount }] = await Promise.all([
+    getProfile(),
+    getPublicStats(),
   ]);
 
   return (

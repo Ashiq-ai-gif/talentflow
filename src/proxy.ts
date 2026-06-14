@@ -1,5 +1,5 @@
 // Next.js 16 renamed Middleware to Proxy. This file refreshes the Supabase
-// auth session cookie on every request and guards protected routes.
+// auth session cookie and guards protected routes.
 import { type NextRequest } from "next/server";
 import { updateSession } from "@/lib/supabase/middleware";
 
@@ -8,7 +8,8 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
-  ],
+  // Only run on protected routes. Public pages (landing, /jobs, auth) don't
+  // need a session refresh or guard, so they skip the round-trip to the auth
+  // server entirely — that network call was adding ~0.5s to every public click.
+  matcher: ["/dashboard/:path*", "/onboarding-role/:path*"],
 };
